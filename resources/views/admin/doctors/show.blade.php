@@ -33,18 +33,22 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.doctor.fields.img') }}
-                        </th>
-                        <td>
-                            {{ $doctor->img }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.doctor.fields.speciality') }}
                         </th>
                         <td>
                             {{ $doctor->speciality->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.doctor.fields.image') }}
+                        </th>
+                        <td>
+                            @if($doctor->image)
+                                <a href="{{ $doctor->image->getUrl() }}" target="_blank" style="display: inline-block">
+                                    <img src="{{ $doctor->image->getUrl('thumb') }}">
+                                </a>
+                            @endif
                         </td>
                     </tr>
                 </tbody>
