@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Doctor;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Arr;
 
 class DoctorsTableSeeder extends Seeder
 {
@@ -14,6 +15,34 @@ class DoctorsTableSeeder extends Seeder
      */
     public function run()
     {
-        $items = [];
+        $specialities = [1, 2, 3, 4];
+        $items = [
+            [
+                'name' => 'Иванов И.И.',
+                'speciality_id' => Arr::random($specialities)
+            ],
+            [
+                'name' => 'Петров И.И.',
+                'speciality_id' => Arr::random($specialities)
+            ],
+            [
+                'name' => 'Сидоров И.И.',
+                'speciality_id' => Arr::random($specialities)
+            ],
+            [
+                'name' => 'Козлов И.И.',
+                'speciality_id' => Arr::random($specialities)
+            ],
+            [
+                'name' => 'Петренко И.И.',
+                'speciality_id' => Arr::random($specialities)
+            ],
+            [
+                'name' => 'Лягушенко И.И.',
+                'speciality_id' => Arr::random($specialities)
+            ],
+        ];
+
+        Doctor::insert($items);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Record;
+use App\Rules\Overlapping;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
@@ -24,6 +25,7 @@ class StoreRecordRequest extends FormRequest
             'datetime' => [
                 'required',
                 'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
+                new Overlapping
             ],
         ];
     }
