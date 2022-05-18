@@ -29,10 +29,10 @@
                             {{ trans('cruds.doctor.fields.name') }}
                         </th>
                         <th>
-                            {{ trans('cruds.doctor.fields.img') }}
+                            {{ trans('cruds.doctor.fields.speciality') }}
                         </th>
                         <th>
-                            {{ trans('cruds.doctor.fields.speciality') }}
+                            {{ trans('cruds.doctor.fields.image') }}
                         </th>
                         <th>
                             &nbsp;
@@ -52,10 +52,14 @@
                                 {{ $doctor->name ?? '' }}
                             </td>
                             <td>
-                                {{ $doctor->img ?? '' }}
+                                {{ $doctor->speciality->name ?? '' }}
                             </td>
                             <td>
-                                {{ $doctor->speciality->name ?? '' }}
+                                @if($doctor->image)
+                                    <a href="{{ $doctor->image->getUrl() }}" target="_blank" style="display: inline-block">
+                                        <img src="{{ $doctor->image->getUrl('thumb') }}">
+                                    </a>
+                                @endif
                             </td>
                             <td>
                                 @can('doctor_show')

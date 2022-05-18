@@ -21,10 +21,6 @@ class UpdateDoctorRequest extends FormRequest
                 'string',
                 'required',
             ],
-            'img' => [
-                'string',
-                'nullable',
-            ],
             'speciality_id' => [
                 'required',
                 'integer',

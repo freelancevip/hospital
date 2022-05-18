@@ -20,16 +20,6 @@
                 <span class="help-block">{{ trans('cruds.doctor.fields.name_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="img">{{ trans('cruds.doctor.fields.img') }}</label>
-                <input class="form-control {{ $errors->has('img') ? 'is-invalid' : '' }}" type="text" name="img" id="img" value="{{ old('img', '') }}">
-                @if($errors->has('img'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('img') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.doctor.fields.img_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label class="required" for="speciality_id">{{ trans('cruds.doctor.fields.speciality') }}</label>
                 <select class="form-control select2 {{ $errors->has('speciality') ? 'is-invalid' : '' }}" name="speciality_id" id="speciality_id" required>
                     @foreach($specialities as $id => $entry)
@@ -44,6 +34,17 @@
                 <span class="help-block">{{ trans('cruds.doctor.fields.speciality_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="image">{{ trans('cruds.doctor.fields.image') }}</label>
+                <div class="needsclick dropzone {{ $errors->has('image') ? 'is-invalid' : '' }}" id="image-dropzone">
+                </div>
+                @if($errors->has('image'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('image') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.doctor.fields.image_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>
@@ -54,4 +55,61 @@
 
 
 
+@endsection
+
+@section('scripts')
+<script>
+    Dropzone.options.imageDropzone = {
+    url: '{{ route('admin.doctors.storeMedia') }}',
+    maxFilesize: 50, // MB
+    acceptedFiles: '.jpeg,.jpg,.png,.gif',
+    maxFiles: 1,
+    addRemoveLinks: true,
+    headers: {
+      'X-CSRF-TOKEN': "{{ csrf_token() }}"
+    },
+    params: {
+      size: 50,
+      width: 4096,
+      height: 4096
+    },
+    success: function (file, response) {
+      $('form').find('input[name="image"]').remove()
+      $('form').append('<input type="hidden" name="image" value="' + response.name + '">')
+    },
+    removedfile: function (file) {
+      file.previewElement.remove()
+      if (file.status !== 'error') {
+        $('form').find('input[name="image"]').remove()
+        this.options.maxFiles = this.options.maxFiles + 1
+      }
+    },
+    init: function () {
+@if(isset($doctor) && $doctor->image)
+      var file = {!! json_encode($doctor->image) !!}
+          this.options.addedfile.call(this, file)
+      this.options.thumbnail.call(this, file, file.preview)
+      file.previewElement.classList.add('dz-complete')
+      $('form').append('<input type="hidden" name="image" value="' + file.file_name + '">')
+      this.options.maxFiles = this.options.maxFiles - 1
+@endif
+    },
+    error: function (file, response) {
+        if ($.type(response) === 'string') {
+            var message = response //dropzone sends it's own error messages in string
+        } else {
+            var message = response.errors.file
+        }
+        file.previewElement.classList.add('dz-error')
+        _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
+        _results = []
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            node = _ref[_i]
+            _results.push(node.textContent = message)
+        }
+
+        return _results
+    }
+}
+</script>
 @endsection
