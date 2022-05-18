@@ -27,6 +27,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Doctor
     Route::delete('doctors/destroy', 'DoctorController@massDestroy')->name('doctors.massDestroy');
+    Route::post('doctors/media', 'DoctorController@storeMedia')->name('doctors.storeMedia');
+    Route::post('doctors/ckmedia', 'DoctorController@storeCKEditorImages')->name('doctors.storeCKEditorImages');
     Route::resource('doctors', 'DoctorController');
 
     // Speciality

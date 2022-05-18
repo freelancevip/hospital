@@ -73,8 +73,6 @@ return [
             'id_helper'         => ' ',
             'name'              => 'Name',
             'name_helper'       => ' ',
-            'img'               => 'Img',
-            'img_helper'        => ' ',
             'created_at'        => 'Created at',
             'created_at_helper' => ' ',
             'updated_at'        => 'Updated at',
@@ -83,6 +81,8 @@ return [
             'deleted_at_helper' => ' ',
             'speciality'        => 'Speciality',
             'speciality_helper' => ' ',
+            'image'             => 'Image',
+            'image_helper'      => ' ',
         ],
     ],
     'speciality' => [
