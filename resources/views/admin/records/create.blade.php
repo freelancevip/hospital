@@ -24,14 +24,24 @@
                 <span class="help-block">{{ trans('cruds.record.fields.doctor_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="datetime">{{ trans('cruds.record.fields.datetime') }}</label>
-                <input class="form-control datetime {{ $errors->has('datetime') ? 'is-invalid' : '' }}" type="text" name="datetime" id="datetime" value="{{ old('datetime') }}" required>
-                @if($errors->has('datetime'))
+                <label class="required" for="start">{{ trans('cruds.record.fields.start') }}</label>
+                <input class="form-control datetime {{ $errors->has('start') ? 'is-invalid' : '' }}" type="text" name="start" id="start" value="{{ old('start') }}" required>
+                @if($errors->has('start'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('datetime') }}
+                        {{ $errors->first('start') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.record.fields.datetime_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.record.fields.start_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="end">{{ trans('cruds.record.fields.end') }}</label>
+                <input class="form-control datetime {{ $errors->has('end') ? 'is-invalid' : '' }}" type="text" name="end" id="end" value="{{ old('end') }}" required>
+                @if($errors->has('end'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('end') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.record.fields.end_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

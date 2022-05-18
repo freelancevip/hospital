@@ -10,7 +10,8 @@ class CreateRecordsTable extends Migration
     {
         Schema::create('records', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->datetime('datetime');
+            $table->datetime('start');
+            $table->datetime('end');
             $table->timestamps();
             $table->softDeletes();
         });
