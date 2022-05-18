@@ -33,10 +33,18 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.record.fields.datetime') }}
+                            {{ trans('cruds.record.fields.start') }}
                         </th>
                         <td>
-                            {{ $record->datetime }}
+                            {{ $record->start }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.record.fields.end') }}
+                        </th>
+                        <td>
+                            {{ $record->end }}
                         </td>
                     </tr>
                 </tbody>

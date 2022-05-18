@@ -21,7 +21,11 @@ class UpdateRecordRequest extends FormRequest
                 'required',
                 'integer',
             ],
-            'datetime' => [
+            'start' => [
+                'required',
+                'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
+            ],
+            'end' => [
                 'required',
                 'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
             ],

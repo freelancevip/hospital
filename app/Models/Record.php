@@ -16,7 +16,8 @@ class Record extends Model
     public $table = 'records';
 
     protected $dates = [
-        'datetime',
+        'start',
+        'end',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -24,7 +25,8 @@ class Record extends Model
 
     protected $fillable = [
         'doctor_id',
-        'datetime',
+        'start',
+        'end',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -35,14 +37,24 @@ class Record extends Model
         return $this->belongsTo(Doctor::class, 'doctor_id');
     }
 
-    public function getDatetimeAttribute($value)
+    public function getStartAttribute($value)
     {
         return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
     }
 
-    public function setDatetimeAttribute($value)
+    public function setStartAttribute($value)
     {
-        $this->attributes['datetime'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
+        $this->attributes['start'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
+    }
+
+    public function getEndAttribute($value)
+    {
+        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
+    }
+
+    public function setEndAttribute($value)
+    {
+        $this->attributes['end'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
     }
 
     protected function serializeDate(DateTimeInterface $date)

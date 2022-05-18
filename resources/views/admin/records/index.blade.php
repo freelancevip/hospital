@@ -29,7 +29,10 @@
                             {{ trans('cruds.record.fields.doctor') }}
                         </th>
                         <th>
-                            {{ trans('cruds.record.fields.datetime') }}
+                            {{ trans('cruds.record.fields.start') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.record.fields.end') }}
                         </th>
                         <th>
                             &nbsp;
@@ -49,7 +52,10 @@
                                 {{ $record->doctor->name ?? '' }}
                             </td>
                             <td>
-                                {{ $record->datetime ?? '' }}
+                                {{ $record->start ?? '' }}
+                            </td>
+                            <td>
+                                {{ $record->end ?? '' }}
                             </td>
                             <td>
                                 @can('record_show')
